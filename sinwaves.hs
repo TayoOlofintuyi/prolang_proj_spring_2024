@@ -28,6 +28,9 @@ middle_c = 261.63
 pitch_standard :: Float
 pitch_standard = 440.0
 
+pitch Float -> Float
+pitch x = pitch_standard * (2 ** (x / 12))
+
 duration :: Float
 duration = 1.0
 
@@ -41,6 +44,34 @@ wave (x:xs) = map ( * def_vol) $ map sin $ map ( * step pitch_standard) (x:xs)
 
 save:: FilePath -> [Float] -> IO ()
 save xs ys = B.writeFile xs $ Bui.toLazyByteString $ fold $ map Bui.floatLE (wave ys)
+
+-- almost organ like
+sin_func_1:: Float -> Float
+sin_func_1 x = sin (x) + sin (x/2) + cos (3 * x)
+
+-- almost like a heart monitor
+sin_func_2:: Float -> Float
+sin_func_2 x = sin (x) + sin (5 * x) + sin (-3 * x)
+
+-- almost like a 
+sin_func_3:: Float -> Float
+sin_func_3 x = sin (x) + cos (2 * x)
+
+-- probably sounds like trash
+sin_func_4:: Float -> Float
+sin_func_4 x = sin (x) + sin (x / 2) + (3 * sin (x / 5))
+
+-- probably sounds like an alarm
+sin_func_5:: Float -> Float
+sin_func_5 x = sin (x) + sin (5 * x) + 3 * (sin (x / 10))
+
+-- probably sounds like an amber alert
+sin_func_6:: Float -> Float
+sin_func_6 x = sin (x) + sin (5 * x) + 3 * (sin (x / 10)) + 2 * (sin (x / 2))
+
+-- probably sounds like a ??????
+sin_func_7:: Float -> Float
+sin_func_7 x = sin (x) + 2 * cos (sqrt (abs x) - 1.5)
 
 play:: FilePath -> IO ()
 play xs = do
