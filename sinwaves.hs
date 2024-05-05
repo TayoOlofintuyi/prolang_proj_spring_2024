@@ -1,3 +1,5 @@
+module SinWaves where
+
 import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Builder as Bui
 import Data.Foldable 
@@ -144,9 +146,15 @@ change_phrase_volume :: Phrase -> Float -> Phrase
 change_phrase_volume (Phrase []) x = Phrase []
 change_phrase_volume (Phrase (y:ys)) x = make_phrase $ map (\ z -> change_note_volume z x) (y:ys)
 
--- change_note_pitch :: Note -> Float -> Note
+set_note_pitch :: Note -> Float -> Note
+set_note_pitch (Note p d v) x = Note x d v
 
--- change_phrase_key :: Phrase -> Float -> Phrase
+scale_note_pitch :: Note -> Float -> Note
+scale_note_pitch (Note p d v) x = Note (p * (2 ** (x / 12))) d v
+
+change_phrase_key :: Phrase -> Float -> Phrase
+change_phrase_key (Phrase []) x = Phrase []
+change_phrase_key (Phrase (y:ys)) x = make_phrase $ map (\ z -> scale_note_pitch z x) (y:ys)
 
 add_note :: Phrase -> Note -> Phrase
 add_note (Phrase xs) y = make_phrase (xs ++ [y])
@@ -159,17 +167,43 @@ remove_note_index (Phrase []) _ = make_phrase []
 remove_note_index (Phrase xs) 0 = make_phrase (tail xs)
 remove_note_index (Phrase (x:xs)) y = add_phrase (make_phrase (x:[]))  (remove_note_index (make_phrase xs) (y - 1))
 
--- pitch_equal :: Note -> (either Note Float) -> Bool
--- -- pitch_equal (Note x _ _) (Note y _ _) = x == y
--- pitch_equal (Note x _ _) (Left (Note y _ _)) = x == y
--- pitch_equal (Note x _ _) (Right y) = x == y
+pitch_equal :: Note ->  Note -> Bool
+pitch_equal (Note x _ _) (Note y _ _) = x == y
 
--- note_equal :: Note -> Note -> Bool
--- note_equal (Note x y z) (Note a b c) = x == a && y == b && z == c
+note_equal :: Note -> Note -> Bool
+note_equal (Note x y z) (Note a b c) = x == a && y == b && z == c
 
--- remove_match_pitch :: Phrase -> Float -> Phrase
--- remove_match_pitch (Phrase []) _ = make_phrase []
--- remove_match_pitch (Phrase (x:xs)) y = 
+remove_match_pitch :: Phrase -> Float -> Phrase
+remove_match_pitch (Phrase []) _ = make_phrase []
+remove_match_pitch (Phrase (x:xs)) y = if pitch_equal x (make_note y 1 1) then remove_match_pitch (make_phrase xs) y else add_phrase (make_phrase (x:[])) (remove_match_pitch (make_phrase xs) y)
+
+remove_match_note :: Phrase -> Note -> Phrase
+remove_match_note (Phrase []) _ = make_phrase []
+remove_match_note (Phrase (x:xs)) y = if note_equal x y then remove_match_note (make_phrase xs) y else add_phrase (make_phrase (x:[])) (remove_match_note (make_phrase xs) y)
+
+insert_note :: Phrase -> Note -> Int -> Phrase
+insert_note (Phrase []) y _ = make_phrase [y]
+insert_note (Phrase xs) y 0 = make_phrase (y:xs)
+insert_note (Phrase (x:xs)) y z = add_phrase (make_phrase (x:[])) (insert_note (make_phrase xs) y (z - 1))
+
+insert_phrase :: Phrase -> Phrase -> Int -> Phrase
+insert_phrase (Phrase []) y _ = y
+insert_phrase (Phrase xs) y 0 = add_phrase y (make_phrase xs)
+insert_phrase (Phrase (x:xs)) y z = add_phrase (make_phrase (x:[])) (insert_phrase (make_phrase xs) y (z - 1))
+
+replace_note_index :: Phrase -> Note -> Int -> Phrase
+replace_note_index (Phrase []) y _ = make_phrase []
+replace_note_index (Phrase (x:xs)) y 0 = make_phrase (y:xs)
+replace_note_index (Phrase (x:xs)) y z = add_phrase (make_phrase (x:[])) (replace_note_index (make_phrase xs) y (z - 1))
+
+find_replace_note :: Phrase -> Note -> Note -> Phrase
+find_replace_note (Phrase []) _ _ = make_phrase []
+find_replace_note (Phrase (x:xs)) y z = if note_equal x y then add_phrase (make_phrase (z:[])) (find_replace_note (make_phrase xs) y z) else add_phrase (make_phrase (x:[])) (find_replace_note (make_phrase xs) y z)
+
+get_note_index :: Phrase -> Int -> [Maybe Note]
+get_note_index (Phrase []) _ = []
+get_note_index (Phrase xs) 0 = [Just (head xs)]
+get_note_index (Phrase (x:xs)) y = get_note_index (make_phrase xs) (y - 1)
 
 def_wave:: [Float]
 def_wave = map ( * def_vol) $ map sin $ map ( * step pitch_standard) [0.0 .. def_duration * rate * 60 / def_bpm]
