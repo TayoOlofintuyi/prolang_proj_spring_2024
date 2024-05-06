@@ -81,6 +81,9 @@ nG4 = pitch 10
 nGsharp4 :: Float
 nGsharp4 = pitch 11
 
+nA4 :: Float
+nA4 = pitch 12
+
 step :: Float -> Float
 step x = 2 * x * pi / rate
 
@@ -105,7 +108,8 @@ instance Show Note where
 -- Phrase contains a list of unprocessed notes
 data Phrase = Phrase [Note]
 instance Show Phrase where
-    show (Phrase xs) = "Phrase: length " ++ printf "%d" (length xs)  ++ "\n" ++ (unlines $ map note_to_string xs)
+    show (Phrase xs) = "Phrase: length " ++ printf "%d" (length xs)  ++ "\n" ++ phrase_to_string (Phrase xs)
+    -- (unlines $ map note_to_string xs)
 
 -- Sound contains a list of processed notes in the form of a list of floats
 data Sound = Sound [Float]
@@ -114,6 +118,13 @@ instance Show Sound where
 
 note_to_string :: Note -> String
 note_to_string (Note p d v) = printf "Note: pitch %f, duration %f, volume %f" p d v
+
+phrase_to_string :: Phrase -> String
+phrase_to_string (Phrase xs) = phrase_to_string_helper xs 1
+
+phrase_to_string_helper :: [Note] -> Int -> String
+phrase_to_string_helper [] _ = ""
+phrase_to_string_helper (x:xs) y = printf "%d: %s\n" y (note_to_string x) ++ phrase_to_string_helper xs (y + 1)
 
 
 make_note :: Float -> Float -> Float -> Note
