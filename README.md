@@ -8,6 +8,30 @@ By: Tayo Olofintuyi
 
 This project is a Haskell library that generates sin waves from musical notes and phrases. It provides functions to create and manipulate notes and phrases, convert them to sound waves, and play or save the sound waves to a file.
 
+# Getting Started
+
+## Installation
+
+Clone this repository to your local machine or download the zip file and extract it.
+
+Cloning with HTTPS:
+    ```$ git clone https://github.com/TayoOlofintuyi/prolang_proj_spring_2024.git```
+
+Cloning with SSH:
+    ```$ git clone git@github.com:TayoOlofintuyi/prolang_proj_spring_2024.git ```
+
+Open a terminal and navigate to the project root directory. If you do not already have it installed, install Haskell. Instructions for installing Haskell can be found [here](https://www.haskell.org/get-started/).
+
+Also, if you have not already, install FFmpeg. Instructions for installing FFmpeg on Windows can be found [here](https://www.gyan.dev/ffmpeg/builds/). Instructions for installing FFmpeg on MacOS can be found [here](https://phoenixnap.com/kb/ffmpeg-mac). Instructions for installing FFmpeg on Linux can be found [here](https://phoenixnap.com/kb/install-ffmpeg-ubuntu).
+
+Once you have Haskell and FFmpeg installed, start the GHCI session by running
+    ```$ ghci```
+
+Then in the GHCI session, load the necessary modules by running
+    ```$ :l driver.hs```
+
+Though `driver.hs` is not the primary file of the project (and it does not act as a driver), it contains the necessary imports and functions to run the project. By loading `driver.hs`, you will also load `sinewaves.hs`, which *is* the main file of the project and contains the necessary functions and data types which can be read about in the API Reference section. What `driver.hs` actually contains is a few examples `Phrases` that can be manipulated and a `sinewaves.hs` import statement.
+
 # API Reference
 
 ## Data Types
@@ -78,7 +102,7 @@ Creates a note with the given pitch, duration, and volume.
 
 Creates a phrase with the given list of notes.
 
-### pitch :: Float -> Float
+### `pitch` :: Float -> Float
 
 Takes in a number and converts it to a pitch that is that many half steps/semitones above the `pitch_standard` of A4.
 
