@@ -78,6 +78,10 @@ Creates a note with the given pitch, duration, and volume.
 
 Creates a phrase with the given list of notes.
 
+### pitch :: Float -> Float
+
+Takes in a number and converts it to a pitch that is that many half steps/semitones above the `pitch_standard` of A4.
+
 ### `process_note` :: Note -> Sound
 
 Creates a sound from a note.
@@ -126,7 +130,7 @@ Changes the duration of a phrase by changing the duration if each Note. The floa
 
 Changes the pitch of a note. The float provided replaces the originally pitch of the note.
 
-### change_note_volume :: Note -> Float -> Note
+### `change_note_volume` :: Note -> Float -> Note
 
 Changes the volume of a note. The float provided scales the originally volume of the note.
 
