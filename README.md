@@ -15,10 +15,14 @@ This project is a Haskell library that generates sin waves from musical notes an
 Clone this repository to your local machine or download the zip file and extract it.
 
 Cloning with HTTPS:
-    ```$ git clone https://github.com/TayoOlofintuyi/prolang_proj_spring_2024.git```
+    ```
+    $ git clone https://github.com/TayoOlofintuyi/prolang_proj_spring_2024.git
+    ```
 
 Cloning with SSH:
-    ```$ git clone git@github.com:TayoOlofintuyi/prolang_proj_spring_2024.git ```
+    ```
+    $ git clone git@github.com:TayoOlofintuyi/prolang_proj_spring_2024.git
+     ```
 
 Open a terminal and navigate to the project root directory. If you do not already have it installed, install Haskell. Instructions for installing Haskell can be found [here](https://www.haskell.org/get-started/).
 
@@ -27,10 +31,14 @@ Also, if you have not already, install FFmpeg. Instructions for installing FFmpe
 ## Running the Project
 
 Once you have Haskell and FFmpeg installed, start the GHCI session by running
-    ```$ ghci```
+    ```
+    $ ghci
+    ```
 
 Then in the GHCI session, load the necessary modules by running
-    ```$ :l driver.hs```
+    ```
+    $ :l driver.hs
+    ```
 
 Though `driver.hs` is not the primary file of the project (and it does not act as a driver), it contains the necessary imports and functions to run the project. By loading `driver.hs`, you will also load `sinewaves.hs`, which *is* the main file of the project and contains the necessary functions and data types which can be read about in the API Reference section. What `driver.hs` actually contains is a few examples `Phrases` that can be manipulated and a `sinewaves.hs` import statement.
 
@@ -48,34 +56,56 @@ scale_5_phrase :: Phrase
 ```
 
 You can make many songs with these phrases and the functions in the API Reference section, but for now, let's put together the song "Twinkle, Twinkle, Little Star". Begin by viewing the `twinkle_phrase` and `up_above_the_world` phrases in the GHCI session by running:
-    ```$ twinkle_phrase```
+    ```
+    $ twinkle_phrase
+    ```
     and
-    ```$ up_above_the_world```
+    ```
+    $ up_above_the_world
+    ```
 
 The song "Twinkle, Twinkle, Little Star" is made up of two patterns, the first reflected in the `twinkle_phrase` and the second in the `up_above_the_world` phrase. To hear both patterns, run:
-    ```$ play_phrase "currently_arbitrary_file_path.bin" twinkle_phrase```
+    ```
+    $ play_phrase "currently_arbitrary_file_path.bin" twinkle_phrase
+    ```
     and
-    ```$ play_phrase "currently_arbitrary_file_path.bin" up_above_the_world```
+    ```
+    $ play_phrase "currently_arbitrary_file_path.bin" up_above_the_world
+    ```
 
 The function that we'll use to combine these two phrases together is called `add_phrase` (which is in the API Reference section). Let's add the two phrases together and store the result in a variable `a`:
-    ```$ a = add_phrase twinkle_phrase up_above_the_world```
+    ```
+    $ a = add_phrase twinkle_phrase up_above_the_world
+    ```
 
 We're half way there! Listen to the song so far by running:
-    ```$ play_phrase "currently_arbitrary_file_path.bin" a```
+    ```
+    $ play_phrase "currently_arbitrary_file_path.bin" a
+    ```
 
 Now let's put together the second half of the song. You can do this by adding the `twinkle_phrase` to the `up_above_the_world` phrase. Store the result in a variable `b`:
-    ```$ b = add_phrase up_above_the_world twinkle_phrase```
+    ```
+    $ b = add_phrase up_above_the_world twinkle_phrase
+    ```
 
 Listen to the second half of the song by running:
-    ```$ play_phrase "currently_arbitrary_file_path.bin" b```
+    ```
+    $ play_phrase "currently_arbitrary_file_path.bin" b
+    ```
 
 Finally, let's put the entire song together by adding the first half of the song and the second half of the song. Store the result in a variable `c`:
-    ```$ c = add_phrase a b```
+    ```
+    $ c = add_phrase a b
+    ```
 
 Let's listen to the final result!
-    ```$ play_phrase "twinkle_twinkle.bin" c```
-You can also now listen to the song by running:
-    ```$ play "twinkle_twinkle.bin"``` anytime.
+    ```
+    $ play_phrase "twinkle_twinkle.bin" c
+    ```
+You can also now listen to the song anytime by running:
+    ```
+    $ play "twinkle_twinkle.bin"
+    ``` 
 
 NOw that you have experienced making a song with this project, you can now explore the API Reference section to learn more about the functions and data types available to you and make more! Enjoy!
 
