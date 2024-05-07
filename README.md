@@ -24,6 +24,8 @@ Open a terminal and navigate to the project root directory. If you do not alread
 
 Also, if you have not already, install FFmpeg. Instructions for installing FFmpeg on Windows can be found [here](https://www.gyan.dev/ffmpeg/builds/). Instructions for installing FFmpeg on MacOS can be found [here](https://phoenixnap.com/kb/ffmpeg-mac). Instructions for installing FFmpeg on Linux can be found [here](https://phoenixnap.com/kb/install-ffmpeg-ubuntu).
 
+## Running the Project
+
 Once you have Haskell and FFmpeg installed, start the GHCI session by running
     ```$ ghci```
 
@@ -31,6 +33,51 @@ Then in the GHCI session, load the necessary modules by running
     ```$ :l driver.hs```
 
 Though `driver.hs` is not the primary file of the project (and it does not act as a driver), it contains the necessary imports and functions to run the project. By loading `driver.hs`, you will also load `sinewaves.hs`, which *is* the main file of the project and contains the necessary functions and data types which can be read about in the API Reference section. What `driver.hs` actually contains is a few examples `Phrases` that can be manipulated and a `sinewaves.hs` import statement.
+
+The phrases in `driver.hs` are:
+```
+c_major_phrase :: Phrase
+...
+c_up_down :: Phrase
+...
+twinkle_phrase :: Phrase
+...
+up_above_the_world :: Phrase
+...
+scale_5_phrase :: Phrase
+```
+
+You can make many songs with these phrases and the functions in the API Reference section, but for now, let's put together the song "Twinkle, Twinkle, Little Star". Begin by viewing the `twinkle_phrase` and `up_above_the_world` phrases in the GHCI session by running:
+    ```$ twinkle_phrase```
+    and
+    ```$ up_above_the_world```
+
+The song "Twinkle, Twinkle, Little Star" is made up of two patterns, the first reflected in the `twinkle_phrase` and the second in the `up_above_the_world` phrase. To hear both patterns, run:
+    ```$ play_phrase "currently_arbitrary_file_path.bin" twinkle_phrase```
+    and
+    ```$ play_phrase "currently_arbitrary_file_path.bin" up_above_the_world```
+
+The function that we'll use to combine these two phrases together is called `add_phrase` (which is in the API Reference section). Let's add the two phrases together and store the result in a variable `a`:
+    ```$ a = add_phrase twinkle_phrase up_above_the_world```
+
+We're half way there! Listen to the song so far by running:
+    ```$ play_phrase "currently_arbitrary_file_path.bin" a```
+
+Now let's put together the second half of the song. You can do this by adding the `twinkle_phrase` to the `up_above_the_world` phrase. Store the result in a variable `b`:
+    ```$ b = add_phrase up_above_the_world twinkle_phrase```
+
+Listen to the second half of the song by running:
+    ```$ play_phrase "currently_arbitrary_file_path.bin" b```
+
+Finally, let's put the entire song together by adding the first half of the song and the second half of the song. Store the result in a variable `c`:
+    ```$ c = add_phrase a b```
+
+Let's listen to the final result!
+    ```$ play_phrase "twinkle_twinkle.bin" c```
+You can also now listen to the song by running:
+    ```$ play "twinkle_twinkle.bin"``` anytime.
+
+NOw that you have experienced making a song with this project, you can now explore the API Reference section to learn more about the functions and data types available to you and make more! Enjoy!
 
 # API Reference
 
@@ -132,11 +179,11 @@ Plays a sound from the file path provided.
 
 ### `play_sound` :: FilePath -> Sound -> IO ()
 
-Plays a sound. requires a file path to write the sound to.
+Plays a sound. requires a file path to write the sound to. Sound will be stored in the file path provided.
 
 ### `play_phrase` :: FilePath -> Phrase -> IO ()
 
-Plays a phrase. requires a file path to write the sound to.
+Plays a phrase. requires a file path to write the sound to. The resulting sound from phrase will be stored in the file path provided.
 
 ### `save` :: FilePath -> Sound -> IO ()
 
