@@ -98,9 +98,9 @@ Converts a phrase to a string.
 
 Concatenates two sounds.
 
-### `process_phrase` :: Phrase -> Sound
+### `play` :: FilePath -> IO ()
 
-Creates a sound from a phrase.
+Plays a sound from the file path provided.
 
 ### `play_sound` :: FilePath -> Sound -> IO ()
 
@@ -126,7 +126,78 @@ Changes the duration of a phrase by changing the duration if each Note. The floa
 
 Changes the pitch of a note. The float provided replaces the originally pitch of the note.
 
-### 
+### change_note_volume :: Note -> Float -> Note
+
+Changes the volume of a note. The float provided scales the originally volume of the note.
+
+### `change_phrase_volume` :: Phrase -> Float -> Phrase
+
+Changes the volume of a phrase by changing the volume of each Note. The float provided scales the original volume of each note the phrase.
+
+### `set_note_pitch` :: Note -> Float -> Note
+
+Changes the pitch of a note. The float provided replaces the originally pitch of the note.
+
+### `scale_note_pitch` :: Note -> Float -> Note
+
+Changes the pitch of a note. The float provided scales the original pitch of the note.
+
+### `change_phrase_key` :: Phrase -> Float -> Phrase
+
+Changes the key of a phrase by changing the pitch of each Note. The float provided scales the original pitch of each note in the phrase.
+
+### `add_note` :: Phrase -> Note -> Phrase
+
+Adds a note to a phrase.
+
+### `add_phrase` :: Phrase -> Phrase -> Phrase
+
+Adds a phrase to another phrase.
+
+### `remove_note_index` :: Phrase -> Int -> Phrase
+
+Removes a note from a phrase at the given index.
+
+### `pitch_equal` :: Note -> Note -> Bool
+
+Checks if two notes have the same pitch.
+
+### `note_equal` :: Note -> Note -> Bool
+
+Checks if two notes are equal.
+
+### `remove_match_pitch` :: Phrase -> Float -> Phrase
+
+Removes all notes with the given pitch from a phrase.
+
+### `remove_match_note` :: Phrase -> Note -> Phrase
+
+Removes all notes equal to the given note from a phrase.
+
+### `insert_note` :: Phrase -> Note -> Int -> Phrase
+
+Inserts a note into a phrase at the given index.
+
+### `insert_phrase` :: Phrase -> Phrase -> Int -> Phrase
+
+Inserts a phrase into another phrase at the given index. The first parameter is the phrase to insert into, the second parameter is the phrase to insert, and the third parameter is the index to insert the phrase at.
+
+### `replace_note_index` :: Phrase -> Note -> Int -> Phrase
+
+Replaces a note in a phrase at the given index.
+
+### `find_replace_note` :: Phrase -> Note -> Note -> Phrase
+
+Finds and replaces all notes equal to the first note with the second note in a phrase.
+
+### `get_note_index` :: Phrase -> Int -> [Maybe Note]
+
+Gets the note at the given index in a phrase.
+
+### `make_wave` :: Float -> Float -> Float -> Float -> Sound
+
+Creates a Sound with the given pitch, duration, bpm, and volume respectively.
+
 
 
 
