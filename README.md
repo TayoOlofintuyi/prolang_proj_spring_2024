@@ -1,14 +1,14 @@
 # SinWaves
 
-## For Programming Languages (CS 3490) Spring 2024
+For Programming Languages (CS 3490) Spring 2024
 
-## By: Tayo Olofintuyi
+By: Tayo Olofintuyi
 
 ## Description
 
+This project is a Haskell library that generates sin waves from musical notes and phrases. It provides functions to create and manipulate notes and phrases, convert them to sound waves, and play or save the sound waves to a file.
 
-
-## API Reference
+# API Reference
 
 ## Data Types
 
@@ -18,11 +18,11 @@ A representation of a musical note. Contains pitch (Float), duration (Float), an
 
 ### `Phrase`
 
-A representation of a musical phrase. Contains a list of `Notes` ([Note]).
+A representation of a musical phrase. Contains a list of `Note`s ([`Note`]).
 
 ### `Sound`
 
-A representation of a sound as a list of values within a sine wave [Float]. 
+A representation of a sound as a list of values within a sine wave [`Float`]. 
 
 ## Constants
 
@@ -43,28 +43,28 @@ A constant representing the default volume of a note (1).
 A constant representing the pitch of middle C (261.63 Hz).
 
 ### -2 Octaves of Note Names-
-    `nC3` :: Float
-    `nCsharp3` :: Float
-    `nD3` :: Float
-    `nDsharp3` :: Float
-    `nE3` :: Float
-    `nF3` :: Float
-    `nFsharp3` :: Float
-    `nG3` :: Float
-    `nGsharp3` :: Float
-    `nA3` :: Float
-    `nAsharp3` :: Float
-    `nB3` :: Float
-    `nC4` :: Float
-    `nCsharp4` :: Float
-    `nD4` :: Float
-    `nDsharp4` :: Float
-    `nE4` :: Float
-    `nF4` :: Float
-    `nFsharp4` :: Float
-    `nG4` :: Float
-    `nGsharp4` :: Float
-    `nA4` :: Float
+    nC3 :: Float
+    nCsharp3 :: Float
+    nD3 :: Float
+    nDsharp3 :: Float
+    nE3 :: Float
+    nF3 :: Float
+    nFsharp3` :: Float
+    nG3 :: Float
+    nGsharp3 :: Float
+    nA3 :: Float
+    nAsharp3 :: Float
+    nB3 :: Float
+    nC4 :: Float
+    nCsharp4 :: Float
+    nD4 :: Float
+    nDsharp4 :: Float
+    nE4 :: Float
+    nF4 :: Float
+    nFsharp4 :: Float
+    nG4 :: Float
+    nGsharp4 :: Float
+    nA4 :: Float
 
 Representing the pitches of the notes in 2 octaves.
 
