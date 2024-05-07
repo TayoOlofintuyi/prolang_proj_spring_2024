@@ -320,7 +320,31 @@ Gets the note at the given index in a phrase.
 
 Creates a Sound with the given pitch, duration, bpm, and volume respectively.
 
+# References
 
+- https://musescore.com/user/61719967/scores/10740637
+
+    Though "Twinkle, Twinkle, Little Star" is a simple song, through lack of sleep and time, I found it useful to use this sheet music to double check the song in this project.
+
+- https://sengpielaudio.com/calculator-centsratio.htm
+
+    I used the formula for the pitch of a note from the following link to convert a number to a pitch that is that many half steps or semitones above the pitch_standard of A4.
+
+- https://github.com/tsoding/haskell-music
+
+    I used this repository as a jumping off point for this project. The wave, save, and play functions were helpful in figuring out how to make a sound emit from the computer that wasn't just random noise. I made changes to how the similar functions in this project work to fit their specific purposes better and to be more modular.
+
+- https://www.gyan.dev/ffmpeg/builds/
+
+    I used this link to find a command to install FFmpeg for Windows. I used FFmpeg to play the sound waves created in this project. Having this was much simpler than trying to mess around with midi files.
+
+- https://stackoverflow.com/questions/6082090/haskell-deriving-show-for-custom-type 
+
+    I used this thread to debug the show statements for the Note, Phrase and Sound data types.
+
+- https://www.desmos.com/calculator
+
+    I used this graphing calculator to visualize the sine waves created in this project. It was helpful to see the waves and understand how they were created. If I had more time, I would create more variations of the sine function to create more interesting sounds.
 
 
 
